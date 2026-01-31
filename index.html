@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oakberry - Ingredientes Aprobados Kosher </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            padding: 20px 50px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo img {
+            height: 60px;
+            width: auto;
+        }
+
+        .logo-text h1 {
+            color: #6b3d87;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .logo-text p {
+            color: #10b981;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        nav a, .dropdown {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: #6b3d87;
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 250px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            border-radius: 8px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 12px 20px;
+            color: #333;
+            text-decoration: none;
+            transition: background 0.3s;
+            font-size: 14px;
+        }
+
+        .dropdown-content a:hover {
+            background: #f3e8ff;
+            color: #6b3d87;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1400px;
+            margin: 50px auto;
+            padding: 0 50px;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .page-title h2 {
+            color: #6b3d87;
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .page-title p {
+            color: #666;
+            font-size: 18px;
+        }
+
+        /* Category Section */
+        .category-section {
+            margin-bottom: 60px;
+        }
+
+        .category-header {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #6b3d87 0%, #8b5ca8 100%);
+            color: white;
+            border-radius: 20px 20px 0 0;
+            margin-bottom: 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .category-header.lacteo {
+            background: linear-gradient(135deg, #9b7bb5 0%, #b89fd0 100%);
+        }
+
+        .category-header-content {
+            flex: 1;
+            text-align: center;
+        }
+
+        .kosher-logo {
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 80px;
+            width: auto;
+        }
+
+        .category-header h3 {
+            font-size: 36px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .category-header .count {
+            font-size: 16px;
+            opacity: 0.95;
+        }
+
+        /* Ingredients Grid */
+        .ingredients-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding: 40px;
+            background: white;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .ingredient-card {
+            text-align: center;
+            padding: 20px;
+            border-radius: 15px;
+            background: #f9f9f9;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .ingredient-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(107, 61, 135, 0.25);
+            background: #f3e8ff;
+        }
+
+        .ingredient-card.lacteo:hover {
+            box-shadow: 0 8px 20px rgba(155, 123, 181, 0.25);
+            background: #f3e8ff;
+        }
+
+        .ingredient-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            background: white;
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .ingredient-name {
+            font-size: 16px;
+            color: #333;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background: #1f1f1f;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+        }
+
+        footer a {
+            color: #10b981;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .ingredients-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+                padding: 30px;
+            }
+
+            .kosher-logo {
+                height: 60px;
+                right: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            main {
+                padding: 0 20px;
+            }
+
+            .ingredients-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 20px;
+            }
+
+            .page-title h2 {
+                font-size: 32px;
+            }
+
+            .category-header h3 {
+                font-size: 28px;
+            }
+
+            .kosher-logo {
+                position: static;
+                transform: none;
+                height: 50px;
+                margin-top: 15px;
+            }
+
+            .category-header {
+                flex-direction: column;
+            }
+
+            .ingredient-image {
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img src="Oakberry_Arara_Roxo.png" alt="Oakberry Logo">
+            </div>
+            <nav>
+                <a href="https://oakberry.cr" target="_blank">Web</a>
+                <div class="dropdown">
+                    <span>Ubicaciones ▼</span>
+                    <div class="dropdown-content">
+                        <a href="#">Alajuela City Mall</a>
+                        <a href="#">Avenida Escazú</a>
+                        <a href="#">Centro Comercial Calle Real Guachipelín</a>
+                        <a href="#">Santa Ana Town Center</a>
+                        <a href="#">Curridabat CC Aleste</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="page-title">
+            <h2>Ingredientes Aprobados Kosher</h2>
+            <p>Not just açai, it's OAKBERRY</p>
+        </div>
+
+        <!-- PARVE Section -->
+        <div class="category-section">
+            <div class="category-header">
+                <div class="category-header-content">
+                    <h3>PARVE</h3>
+                    <p class="count">15 ingredientes</p>
+                </div>
+                <img src="SELLO KASHRUT PARVE PNG.png" alt="Kosher Parve" class="kosher-logo">
+            </div>
+            <div class="ingredients-grid">
+                <div class="ingredient-card">
+                    <img src="acai.png" alt="Açaí" class="ingredient-image">
+                    <div class="ingredient-name">Açaí</div>
+                </div>
+                <div class="ingredient-card">
+                    <img src="semillas chía.png" alt="Semillas de chía" class="ingredient-image">
+                    <div class="ingredient-name">Semillas de chía</div>
+                </div>
+                <div class="ingredient-card">
+                    <img src="Cacao nibs.png" alt="Cacao Nibs" class="ingredient-image">
+                    <div class="ingredient-name">Cacao Nibs</div>
+                </div>
+                <div class="ingredient-card">
+                    <img src="Miel.png" alt="Miel de abeja" class="ingredient-image">
+                    <div class="ingredient-name">Miel de abeja</div>
+                </div>
+                <div class="ingredient-card">
+                    <img src="Coco rallado.png" alt="Coco rayado" class="ingredient-image">
+                    <div class="ingredient-name">Coco rayado</div>
+                </div>
+                <div class="ingredient-card">
+                    <img src="Avena.png" alt="Avena en hojuela" class="ingredient-image">
+                    <div class="ingredient-name">Avena en hojuela</div>
+                </div>
+                <div class="ingredient-card">
+                    <img src="Mantequilla de  maní.png" alt="Mantequilla de maní" class="ingredient-image">
+                    <div class="ingredient-name">Mantequilla de maní</div>
+                </div>
+                <div class="ingredient-card">
+                    <img src="home_producto.png" alt="Banano" class="ingredient-image">
+                    <div class="ingredient-name">Banano</div>
+                </div>
+                <div class="ingredient-card">
+                    <img src="Kiwi.jpg" alt="Kiwi" class="ingredient-image">
+                    <div class="ingredient-name">Kiwi</div>
+                </div>
+                <div class="ingredient-card">
+                    <img src="arandanos.jpg" alt="Arándanos" class="ingredient-image">
+                    <div class="ingredient-name">Arándanos</div>
+                </div>
+                <div class="ingredient-card">
+                    <img src="FRESA2-scaled.jpg" alt="Fresas" class="ingredient-image">
+                    <div class="ingredient-name">Fresas</div>
+                </div>
+                <div class="ingredient-card">
+                    <img src="Maracuya-best-berries-peru.png" alt="Maracuyá" class="ingredient-image">
+                    <div class="ingredient-name">Maracuyá</div>
+                </div>
+                <div class="ingredient-card">
+                    <img src="Mani picado.png" alt="Maní picado" class="ingredient-image">
+                    <div class="ingredient-name">Maní picado</div>
+                </div>
+                <div class="ingredient-card">
+                    <img src="Marañon picado.png" alt="Marañón picado" class="ingredient-image">
+                    <div class="ingredient-name">Marañón picado</div>
+                </div>
+                <div class="ingredient-card">
+                    <img src="Granola avena y miel.png" alt="Granola avena miel" class="ingredient-image">
+                    <div class="ingredient-name">Granola avena miel</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LACTEO Section -->
+        <div class="category-section">
+            <div class="category-header lacteo">
+                <div class="category-header-content">
+                    <h3>LÁCTEO</h3>
+                    <p class="count">2 ingredientes</p>
+                </div>
+                <img src="Sellos Kosher lacteo.png" alt="Kosher Lácteo" class="kosher-logo">
+            </div>
+            <div class="ingredients-grid">
+                <div class="ingredient-card lacteo">
+                    <img src="Leche en polvo.png" alt="Leche en polvo" class="ingredient-image">
+                    <div class="ingredient-name">Leche en polvo</div>
+                </div>
+                <div class="ingredient-card lacteo">
+                    <img src="Leche condensada.png" alt="Leche condensada" class="ingredient-image">
+                    <div class="ingredient-name">Leche condensada</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Oakberry Costa Rica | <a href="https://oakberry.cr" target="_blank">oakberry.cr</a></p>
+    </footer>
+</body>
+</html>
