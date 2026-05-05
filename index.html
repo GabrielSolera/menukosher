@@ -1,447 +1,818 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oakberry - Ingredientes Aprobados Kosher </title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oakberry — Ingredientes Kosher</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&display=swap" rel="stylesheet">
+<style>
+@import url('https://fonts.cdnfonts.com/css/nexa-slab');
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
-            min-height: 100vh;
-        }
+:root {
+  --oak-purple: #4a1f60;
+  --oak-purple-light: #7d5596;
+  --oak-purple-dark: #280532;
+  --oak-blueberry: #5b94b7;
+  --oak-strawberry: #ff4b5f;
+  --oak-granola: #eaa55e;
+  --oak-cream: #f5eee0;
+  --oak-dark: #280532;
+  --text-main: #280532;
+  --text-muted: #7d5596;
+  --card-bg: #ffffff;
+  --section-bg: #ede4d6;
+  --font-display: 'Nexa Slab', 'Georgia', serif;
+  --font-body: 'DM Sans', sans-serif;
+}
 
-        /* Header */
-        header {
-            background: white;
-            padding: 20px 50px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+html { scroll-behavior: smooth; }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+body {
+  font-family: var(--font-body);
+  background: var(--oak-cream);
+  color: var(--text-main);
+  overflow-x: hidden;
+}
 
-        .logo img {
-            height: 60px;
-            width: auto;
-        }
+/* ── HEADER ─────────────────────────────────── */
+header {
+  background: var(--oak-dark);
+  padding: 0 60px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+}
 
-        .logo-text h1 {
-            color: #6b3d87;
-            font-size: 28px;
-            font-weight: 700;
-        }
+.logo img { height: 44px; width: auto; filter: brightness(0) invert(1); }
 
-        .logo-text p {
-            color: #10b981;
-            font-size: 12px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
+nav { display: flex; align-items: center; gap: 36px; }
 
-        /* Navigation */
-        nav {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-        }
+nav a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: .5px;
+  transition: color .2s;
+}
+nav a:hover { color: #fff; }
 
-        nav a, .dropdown {
-            color: #333;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 16px;
-            transition: color 0.3s;
-            position: relative;
-        }
+.dropdown { position: relative; cursor: pointer; }
+.dropdown > span {
+  color: rgba(255,255,255,0.7);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: .5px;
+  transition: color .2s;
+  display: flex; align-items: center; gap: 6px;
+}
+.dropdown:hover > span { color: #fff; }
 
-        nav a:hover {
-            color: #6b3d87;
-        }
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  background: white;
+  min-width: 260px;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.25);
+  overflow: hidden;
+  animation: fadeDown .2s ease;
+}
+@keyframes fadeDown { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
+.dropdown:hover .dropdown-content { display: block; }
 
-        /* Dropdown */
-        .dropdown {
-            position: relative;
-            cursor: pointer;
-        }
+.dropdown-content a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 20px;
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background .2s;
+  border-bottom: 1px solid #ede4d6;
+}
+.dropdown-content a:last-child { border-bottom: none; }
+.dropdown-content a:hover { background: #ede4d6; color: var(--oak-purple); }
+.dropdown-content a::before {
+  content: '📍';
+  font-size: 13px;
+}
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: white;
-            min-width: 250px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            border-radius: 8px;
-            margin-top: 10px;
-            overflow: hidden;
-        }
+/* ── HERO ─────────────────────────────────── */
+.hero {
+  background: var(--oak-dark);
+  color: white;
+  text-align: center;
+  padding: 90px 40px 100px;
+  position: relative;
+  overflow: hidden;
+}
 
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(74,31,96,.6) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 30%, rgba(13,179,122,.15) 0%, transparent 50%);
+}
 
-        .dropdown-content a {
-            display: block;
-            padding: 12px 20px;
-            color: #333;
-            text-decoration: none;
-            transition: background 0.3s;
-            font-size: 14px;
-        }
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 99px;
+  padding: 6px 18px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--oak-blueberry);
+  margin-bottom: 28px;
+  position: relative;
+}
 
-        .dropdown-content a:hover {
-            background: #f3e8ff;
-            color: #6b3d87;
-        }
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(42px, 6vw, 80px);
+  font-weight: 900;
+  line-height: 1.05;
+  position: relative;
+  margin-bottom: 20px;
+}
 
-        /* Main Content */
-        main {
-            max-width: 1400px;
-            margin: 50px auto;
-            padding: 0 50px;
-        }
+.hero h1 em {
+  font-style: italic;
+  color: var(--oak-strawberry);
+}
 
-        .page-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
+.hero p {
+  color: rgba(255,255,255,.55);
+  font-size: 17px;
+  position: relative;
+  max-width: 440px;
+  margin: 0 auto 50px;
+}
 
-        .page-title h2 {
-            color: #6b3d87;
-            font-size: 42px;
-            margin-bottom: 10px;
-        }
+/* Country selector */
+.country-selector {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  position: relative;
+  flex-wrap: wrap;
+}
 
-        .page-title p {
-            color: #666;
-            font-size: 18px;
-        }
+.country-btn {
+  background: rgba(255,255,255,.06);
+  border: 1.5px solid rgba(255,255,255,.15);
+  color: rgba(255,255,255,.7);
+  padding: 14px 32px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: all .25s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-        /* Category Section */
-        .category-section {
-            margin-bottom: 60px;
-        }
+.country-btn:hover {
+  background: rgba(255,255,255,.12);
+  border-color: rgba(255,255,255,.35);
+  color: white;
+  transform: translateY(-2px);
+}
 
-        .category-header {
-            text-align: center;
-            padding: 30px;
-            background: linear-gradient(135deg, #6b3d87 0%, #8b5ca8 100%);
-            color: white;
-            border-radius: 20px 20px 0 0;
-            margin-bottom: 0;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+.country-btn.active {
+  background: var(--oak-purple);
+  border-color: var(--oak-purple-light);
+  color: white;
+  box-shadow: 0 8px 30px rgba(74,31,96,.5);
+  transform: translateY(-2px);
+}
 
-        .category-header.lacteo {
-            background: linear-gradient(135deg, #9b7bb5 0%, #b89fd0 100%);
-        }
+.flag { font-size: 22px; }
 
-        .category-header-content {
-            flex: 1;
-            text-align: center;
-        }
+/* ── KOSHER BADGE STRIP ─────────────────────────────────── */
+.kosher-strip {
+  background: white;
+  border-bottom: 1px solid #ddd4c4;
+  padding: 20px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
 
-        .kosher-logo {
-            position: absolute;
-            right: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            height: 80px;
-            width: auto;
-        }
+.kosher-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: .5px;
+  text-transform: uppercase;
+}
 
-        .category-header h3 {
-            font-size: 36px;
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
+.kosher-item img {
+  height: 52px;
+  width: auto;
+}
 
-        .category-header .count {
-            font-size: 16px;
-            opacity: 0.95;
-        }
+.ksep { width: 1px; height: 36px; background: #ddd4c4; }
 
-        /* Ingredients Grid */
-        .ingredients-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            padding: 40px;
-            background: white;
-            border-radius: 0 0 20px 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
+/* ── INGREDIENTS SECTION ─────────────────────────────────── */
+.ingredients-section {
+  display: none;
+  padding: 70px 60px;
+  max-width: 1400px;
+  margin: 0 auto;
+  animation: sectionIn .4s ease;
+}
+.ingredients-section.visible { display: block; }
 
-        .ingredient-card {
-            text-align: center;
-            padding: 20px;
-            border-radius: 15px;
-            background: #f9f9f9;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
+@keyframes sectionIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
 
-        .ingredient-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 20px rgba(107, 61, 135, 0.25);
-            background: #f3e8ff;
-        }
+.section-intro {
+  text-align: center;
+  margin-bottom: 60px;
+}
 
-        .ingredient-card.lacteo:hover {
-            box-shadow: 0 8px 20px rgba(155, 123, 181, 0.25);
-            background: #f3e8ff;
-        }
+.section-intro h2 {
+  font-family: var(--font-display);
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--oak-purple);
+  margin-bottom: 8px;
+}
 
-        .ingredient-image {
-            width: 100%;
-            height: 200px;
-            object-fit: contain;
-            margin-bottom: 15px;
-            background: white;
-            border-radius: 10px;
-            padding: 10px;
-        }
+.section-intro p { color: var(--text-muted); font-size: 16px; }
 
-        .ingredient-name {
-            font-size: 16px;
-            color: #333;
-            font-weight: 600;
-            margin-top: 10px;
-        }
+/* Sub-category */
+.sub-category { margin-bottom: 60px; }
 
-        /* Footer */
-        footer {
-            background: #1f1f1f;
-            color: white;
-            text-align: center;
-            padding: 30px;
-            margin-top: 50px;
-        }
+.sub-cat-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
 
-        footer a {
-            color: #10b981;
-            text-decoration: none;
-        }
+.sub-cat-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-        footer a:hover {
-            text-decoration: underline;
-        }
+.sub-cat-badge {
+  background: var(--oak-purple);
+  color: white;
+  padding: 6px 18px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
 
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .ingredients-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 25px;
-                padding: 30px;
-            }
+.sub-cat-badge.green { background: var(--oak-blueberry); }
+.sub-cat-badge.gold { background: var(--oak-granola); color: white; }
 
-            .kosher-logo {
-                height: 60px;
-                right: 20px;
-            }
-        }
+.sub-cat-line { flex: 1; height: 1px; background: #ddd4c4; }
 
-        @media (max-width: 768px) {
-            header {
-                padding: 15px 20px;
-            }
+.sub-cat-type {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: white;
+  border: 1px solid #ddd4c4;
+  padding: 4px 12px;
+  border-radius: 99px;
+}
 
-            .header-content {
-                flex-direction: column;
-                gap: 20px;
-            }
+/* Cards grid */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
 
-            nav {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 15px;
-            }
+/* Flip card */
+.flip-card {
+  perspective: 1000px;
+  height: 280px;
+  cursor: pointer;
+}
 
-            main {
-                padding: 0 20px;
-            }
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform .55s cubic-bezier(.4,0,.2,1);
+  transform-style: preserve-3d;
+}
 
-            .ingredients-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-                padding: 20px;
-            }
+.flip-card:hover .flip-inner,
+.flip-card.flipped .flip-inner {
+  transform: rotateY(180deg);
+}
 
-            .page-title h2 {
-                font-size: 32px;
-            }
+.flip-front, .flip-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  overflow: hidden;
+}
 
-            .category-header h3 {
-                font-size: 28px;
-            }
+.flip-front {
+  background: white;
+  box-shadow: 0 2px 16px rgba(92,45,140,.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 16px;
+  border: 1.5px solid #ede4d6;
+  transition: border-color .2s;
+}
 
-            .kosher-logo {
-                position: static;
-                transform: none;
-                height: 50px;
-                margin-top: 15px;
-            }
+.flip-card:hover .flip-front { border-color: var(--oak-purple-light); }
 
-            .category-header {
-                flex-direction: column;
-            }
+.flip-front img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  margin-bottom: 14px;
+}
 
-            .ingredient-image {
-                height: 180px;
-            }
-        }
-    </style>
+.flip-front .name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+  text-align: center;
+}
+
+.flip-front .hint {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+.flip-back {
+  background: var(--oak-purple);
+  transform: rotateY(180deg);
+  color: white;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.flip-back .back-name {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.flip-back .nutri-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: rgba(255,255,255,.75);
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255,255,255,.12);
+}
+
+.flip-back .nutri-row:last-of-type { border-bottom: none; }
+
+.flip-back .nutri-val {
+  color: var(--oak-blueberry);
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.flip-back .benefit {
+  margin-top: 10px;
+  font-size: 11px;
+  color: rgba(255,255,255,.6);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* Kosher tag on card */
+.flip-front .kosher-tag {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 99px;
+  background: #ede4d6;
+  color: var(--oak-purple);
+}
+
+.flip-front .kosher-tag.lacteo {
+  background: #ffe0e3;
+  color: #c0172b;
+}
+
+/* ── DIVIDER ─────────────────────────────────── */
+.divider-wave {
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  background: var(--oak-dark);
+}
+.divider-wave svg { display: block; }
+
+/* ── FOOTER ─────────────────────────────────── */
+footer {
+  background: var(--oak-dark);
+  color: rgba(255,255,255,.4);
+  text-align: center;
+  padding: 30px 40px;
+  font-size: 13px;
+}
+footer a { color: var(--oak-blueberry); text-decoration: none; }
+
+/* ── RESPONSIVE ─────────────────────────────────── */
+@media (max-width: 900px) {
+  header { padding: 0 24px; }
+  .ingredients-section { padding: 50px 24px; }
+  .kosher-strip { padding: 16px 24px; gap: 20px; }
+  .cards-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }
+  .flip-card { height: 250px; }
+}
+
+@media (max-width: 600px) {
+  .hero { padding: 70px 24px 80px; }
+  .cards-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <div class="logo">
-                <img src="Oakberry_Arara_Roxo.png" alt="Oakberry Logo">
-            </div>
-            <nav>
-                <a href="https://oakberry.cr" target="_blank">Web</a>
-                <div class="dropdown">
-                    <span>Ubicaciones ▼</span>
-                    <div class="dropdown-content">
-                        <a href="#">Alajuela City Mall</a>
-                        <a href="#">Avenida Escazú</a>
-                        <a href="#">Centro Comercial Calle Real Guachipelín</a>
-                        <a href="#">Santa Ana Town Center</a>
-                        <a href="#">Curridabat CC Aleste</a>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </header>
 
-    <main>
-        <div class="page-title">
-            <h2>Ingredientes Aprobados Kosher</h2>
-            <p>Not just açai, it's OAKBERRY</p>
-        </div>
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <img src="Oakberry_Arara_Roxo.png" alt="Oakberry">
+  </div>
+  <nav>
+    <a href="https://oakberry.cr" target="_blank">Web</a>
+    <div class="dropdown">
+      <span>Ubicaciones ▾</span>
+      <div class="dropdown-content">
+        <a href="https://www.google.com/maps?sca_esv=4984aa9a092ab98a&q=city+mall&source=lnms&entry=mc" target="_blank">City Mall — Alajuela</a>
+        <a href="https://www.google.com/maps/place/Oakberry+A%C3%A7ai/@9.9368674,-84.156629,17z" target="_blank">Guachipelín — Escazú</a>
+        <a href="https://www.google.com/maps/place/OakBerry+A%C3%A7a%C3%AD+Avenida+Escaz%C3%BA/@9.9383282,-84.1459135,17z" target="_blank">Avenida Escazú</a>
+        <a href="https://www.google.com/maps/place/Santa+Ana+Town+Center/@9.9340673,-84.1895976,17z" target="_blank">Santa Ana Town Center</a>
+      </div>
+    </div>
+  </nav>
+</header>
 
-        <!-- PARVE Section -->
-        <div class="category-section">
-            <div class="category-header">
-                <div class="category-header-content">
-                    <h3>PARVE</h3>
-                    <p class="count">15 ingredientes</p>
-                </div>
-                <img src="SELLO KASHRUT PARVE PNG.png" alt="Kosher Parve" class="kosher-logo">
-            </div>
-            <div class="ingredients-grid">
-                <div class="ingredient-card">
-                    <img src="acai.png" alt="Açaí" class="ingredient-image">
-                    <div class="ingredient-name">Açaí</div>
-                </div>
-                <div class="ingredient-card">
-                    <img src="semillas chía.png" alt="Semillas de chía" class="ingredient-image">
-                    <div class="ingredient-name">Semillas de chía</div>
-                </div>
-                <div class="ingredient-card">
-                    <img src="Cacao nibs.png" alt="Cacao Nibs" class="ingredient-image">
-                    <div class="ingredient-name">Cacao Nibs</div>
-                </div>
-                <div class="ingredient-card">
-                    <img src="Miel.png" alt="Miel de abeja" class="ingredient-image">
-                    <div class="ingredient-name">Miel de abeja</div>
-                </div>
-                <div class="ingredient-card">
-                    <img src="Coco rallado.png" alt="Coco rayado" class="ingredient-image">
-                    <div class="ingredient-name">Coco rayado</div>
-                </div>
-                <div class="ingredient-card">
-                    <img src="Avena.png" alt="Avena en hojuela" class="ingredient-image">
-                    <div class="ingredient-name">Avena en hojuela</div>
-                </div>
-                <div class="ingredient-card">
-                    <img src="Mantequilla de  maní.png" alt="Mantequilla de maní" class="ingredient-image">
-                    <div class="ingredient-name">Mantequilla de maní</div>
-                </div>
-                <div class="ingredient-card">
-                    <img src="home_producto.png" alt="Banano" class="ingredient-image">
-                    <div class="ingredient-name">Banano</div>
-                </div>
-                <div class="ingredient-card">
-                    <img src="Kiwi.jpg" alt="Kiwi" class="ingredient-image">
-                    <div class="ingredient-name">Kiwi</div>
-                </div>
-                <div class="ingredient-card">
-                    <img src="arandanos.jpg" alt="Arándanos" class="ingredient-image">
-                    <div class="ingredient-name">Arándanos</div>
-                </div>
-                <div class="ingredient-card">
-                    <img src="FRESA2-scaled.jpg" alt="Fresas" class="ingredient-image">
-                    <div class="ingredient-name">Fresas</div>
-                </div>
-                <div class="ingredient-card">
-                    <img src="Maracuya-best-berries-peru.png" alt="Maracuyá" class="ingredient-image">
-                    <div class="ingredient-name">Maracuyá</div>
-                </div>
-                <div class="ingredient-card">
-                    <img src="Mani picado.png" alt="Maní picado" class="ingredient-image">
-                    <div class="ingredient-name">Maní picado</div>
-                </div>
-                <div class="ingredient-card">
-                    <img src="Marañon picado.png" alt="Marañón picado" class="ingredient-image">
-                    <div class="ingredient-name">Marañón picado</div>
-                </div>
-                <div class="ingredient-card">
-                    <img src="Granola avena y miel.png" alt="Granola avena miel" class="ingredient-image">
-                    <div class="ingredient-name">Granola avena miel</div>
-                </div>
-            </div>
-        </div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">✡ Certificado Kosher</div>
+  <h1>Ingredientes<br><em>Aprobados</em> Kosher</h1>
+  <p>Seleccioná tu país para ver los ingredientes certificados disponibles en tu ubicación.</p>
 
-        <!-- LACTEO Section -->
-        <div class="category-section">
-            <div class="category-header lacteo">
-                <div class="category-header-content">
-                    <h3>LÁCTEO</h3>
-                    <p class="count">2 ingredientes</p>
-                </div>
-                <img src="Sellos Kosher lacteo.png" alt="Kosher Lácteo" class="kosher-logo">
-            </div>
-            <div class="ingredients-grid">
-                <div class="ingredient-card lacteo">
-                    <img src="Leche en polvo.png" alt="Leche en polvo" class="ingredient-image">
-                    <div class="ingredient-name">Leche en polvo</div>
-                </div>
-                <div class="ingredient-card lacteo">
-                    <img src="Leche condensada.png" alt="Leche condensada" class="ingredient-image">
-                    <div class="ingredient-name">Leche condensada</div>
-                </div>
-            </div>
-        </div>
-    </main>
+  <div class="country-selector">
+    <button class="country-btn" onclick="selectCountry('cr')" id="btn-cr">
+      <span class="flag">🇨🇷</span> Costa Rica
+    </button>
+    <button class="country-btn" onclick="selectCountry('pa')" id="btn-pa">
+      <span class="flag">🇵🇦</span> Panamá
+    </button>
+  </div>
+</section>
 
-    <footer>
-        <p>&copy; 2026 Oakberry Costa Rica | <a href="https://oakberry.cr" target="_blank">oakberry.cr</a></p>
-    </footer>
+<!-- KOSHER SEAL STRIP -->
+<div class="kosher-strip">
+  <div class="kosher-item">
+    <img src="SELLO KASHRUT PARVE PNG.png" alt="Kosher Parve">
+    <span>Parve — Sin lácteos ni carne</span>
+  </div>
+  <div class="ksep"></div>
+  <div class="kosher-item">
+    <img src="Sellos Kosher lacteo.png" alt="Kosher Lácteo">
+    <span>Lácteo — Con derivados lácteos</span>
+  </div>
+</div>
+
+<!-- ══════════════ COSTA RICA ══════════════ -->
+<div class="ingredients-section" id="section-cr">
+  <div class="section-intro">
+    <h2>🇨🇷 Costa Rica</h2>
+    <p>17 ingredientes certificados Kosher disponibles en nuestras tiendas costarricenses.</p>
+  </div>
+
+  <!-- AÇAÍ -->
+  <div class="sub-category">
+    <div class="sub-cat-header">
+      <div class="sub-cat-label">
+        <span class="sub-cat-badge">Base</span>
+        <span class="sub-cat-type">Parve</span>
+      </div>
+      <div class="sub-cat-line"></div>
+    </div>
+    <div class="cards-grid">
+      <!-- Açaí -->
+      <div class="flip-card">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <span class="kosher-tag">Parve</span>
+            <img src="acai.png" alt="Açaí">
+            <div class="name">Açaí</div>
+            <div class="hint">Hover para info nutricional</div>
+          </div>
+          <div class="flip-back">
+            <div>
+              <div class="back-name">Açaí</div>
+              <div class="nutri-row"><span>Calorías</span><span class="nutri-val">70 kcal / 100g</span></div>
+              <div class="nutri-row"><span>Grasas saludables</span><span class="nutri-val">5g</span></div>
+              <div class="nutri-row"><span>Proteína</span><span class="nutri-val">1.5g</span></div>
+              <div class="nutri-row"><span>Antioxidantes</span><span class="nutri-val">Alto</span></div>
+              <div class="nutri-row"><span>Fibra</span><span class="nutri-val">2g</span></div>
+            </div>
+            <div class="benefit">Superfruit amazónica rica en antocianinas y ácidos grasos Omega-9.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FRUTAS -->
+  <div class="sub-category">
+    <div class="sub-cat-header">
+      <div class="sub-cat-label">
+        <span class="sub-cat-badge green">Frutas</span>
+        <span class="sub-cat-type">Parve</span>
+      </div>
+      <div class="sub-cat-line"></div>
+    </div>
+    <div class="cards-grid">
+
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="kosher-tag">Parve</span><img src="home_producto.png" alt="Banano"><div class="name">Banano</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-back"><div><div class="back-name">Banano</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">89 kcal / 100g</span></div><div class="nutri-row"><span>Carbohidratos</span><span class="nutri-val">23g</span></div><div class="nutri-row"><span>Potasio</span><span class="nutri-val">358mg</span></div><div class="nutri-row"><span>Vitamina B6</span><span class="nutri-val">20% VD</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">2.6g</span></div></div><div class="benefit">Excelente fuente de energía rápida y potasio para el sistema nervioso.</div></div>
+      </div></div>
+
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="kosher-tag">Parve</span><img src="Kiwi.jpg" alt="Kiwi"><div class="name">Kiwi</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-back"><div><div class="back-name">Kiwi</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">61 kcal / 100g</span></div><div class="nutri-row"><span>Vitamina C</span><span class="nutri-val">154% VD</span></div><div class="nutri-row"><span>Vitamina K</span><span class="nutri-val">38% VD</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">3g</span></div><div class="nutri-row"><span>Azúcar natural</span><span class="nutri-val">9g</span></div></div><div class="benefit">Cargado de Vitamina C — refuerza el sistema inmune y la piel.</div></div>
+      </div></div>
+
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="kosher-tag">Parve</span><img src="arandanos.jpg" alt="Arándanos"><div class="name">Arándanos</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-back"><div><div class="back-name">Arándanos</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">57 kcal / 100g</span></div><div class="nutri-row"><span>Antioxidantes</span><span class="nutri-val">Muy alto</span></div><div class="nutri-row"><span>Vitamina C</span><span class="nutri-val">16% VD</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">2.4g</span></div><div class="nutri-row"><span>Azúcar natural</span><span class="nutri-val">10g</span></div></div><div class="benefit">Líderes en antioxidantes — protegen las células y mejoran la memoria.</div></div>
+      </div></div>
+
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="kosher-tag">Parve</span><img src="FRESA2-scaled.jpg" alt="Fresas"><div class="name">Fresas</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-back"><div><div class="back-name">Fresas</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">32 kcal / 100g</span></div><div class="nutri-row"><span>Vitamina C</span><span class="nutri-val">97% VD</span></div><div class="nutri-row"><span>Manganeso</span><span class="nutri-val">18% VD</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">2g</span></div><div class="nutri-row"><span>Azúcar natural</span><span class="nutri-val">4.9g</span></div></div><div class="benefit">Bajas en calorías, altas en Vitamina C y polifenoles antiinflamatorios.</div></div>
+      </div></div>
+
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="kosher-tag">Parve</span><img src="Maracuya-best-berries-peru.png" alt="Maracuyá"><div class="name">Maracuyá</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-back"><div><div class="back-name">Maracuyá</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">97 kcal / 100g</span></div><div class="nutri-row"><span>Vitamina A</span><span class="nutri-val">24% VD</span></div><div class="nutri-row"><span>Vitamina C</span><span class="nutri-val">49% VD</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">10.4g</span></div><div class="nutri-row"><span>Potasio</span><span class="nutri-val">348mg</span></div></div><div class="benefit">Altísimo en fibra y con propiedades calmantes naturales.</div></div>
+      </div></div>
+
+    </div>
+  </div>
+
+  <!-- TOPPINGS -->
+  <div class="sub-category">
+    <div class="sub-cat-header">
+      <div class="sub-cat-label">
+        <span class="sub-cat-badge gold">Toppings</span>
+        <span class="sub-cat-type">Parve</span>
+      </div>
+      <div class="sub-cat-line"></div>
+    </div>
+    <div class="cards-grid">
+
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="kosher-tag">Parve</span><img src="semillas chía.png" alt="Chía"><div class="name">Semillas de chía</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-back"><div><div class="back-name">Semillas de chía</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">486 kcal / 100g</span></div><div class="nutri-row"><span>Omega-3</span><span class="nutri-val">17.8g</span></div><div class="nutri-row"><span>Proteína</span><span class="nutri-val">16.5g</span></div><div class="nutri-row"><span>Calcio</span><span class="nutri-val">63% VD</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">34g</span></div></div><div class="benefit">Superfood con Omega-3 vegetal, proteína completa y fibra excepcional.</div></div>
+      </div></div>
+
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="kosher-tag">Parve</span><img src="Cacao nibs.png" alt="Cacao Nibs"><div class="name">Cacao Nibs</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-back"><div><div class="back-name">Cacao Nibs</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">229 kcal / 30g</span></div><div class="nutri-row"><span>Hierro</span><span class="nutri-val">7% VD</span></div><div class="nutri-row"><span>Magnesio</span><span class="nutri-val">16% VD</span></div><div class="nutri-row"><span>Antioxidantes</span><span class="nutri-val">Muy alto</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">9g</span></div></div><div class="benefit">Cacao puro — estimula el estado de ánimo sin azúcar añadida.</div></div>
+      </div></div>
+
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="kosher-tag">Parve</span><img src="Miel.png" alt="Miel"><div class="name">Miel de abeja</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-back"><div><div class="back-name">Miel de abeja</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">304 kcal / 100g</span></div><div class="nutri-row"><span>Azúcares</span><span class="nutri-val">82g</span></div><div class="nutri-row"><span>Vitamina B2</span><span class="nutri-val">Trazas</span></div><div class="nutri-row"><span>Antioxidantes</span><span class="nutri-val">Moderado</span></div><div class="nutri-row"><span>Antimicrobiano</span><span class="nutri-val">Natural</span></div></div><div class="benefit">Endulzante natural con propiedades antibacterianas y antiinflamatorias.</div></div>
+      </div></div>
+
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="kosher-tag">Parve</span><img src="Coco rallado.png" alt="Coco"><div class="name">Coco rayado</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-back"><div><div class="back-name">Coco rayado</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">354 kcal / 100g</span></div><div class="nutri-row"><span>Grasas MCT</span><span class="nutri-val">33g</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">9g</span></div><div class="nutri-row"><span>Manganeso</span><span class="nutri-val">60% VD</span></div><div class="nutri-row"><span>Selenio</span><span class="nutri-val">14% VD</span></div></div><div class="benefit">Grasas de cadena media (MCT) de rápida absorción y energía duradera.</div></div>
+      </div></div>
+
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="kosher-tag">Parve</span><img src="Avena.png" alt="Avena"><div class="name">Avena en hojuela</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-back"><div><div class="back-name">Avena en hojuela</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">389 kcal / 100g</span></div><div class="nutri-row"><span>Beta-glucano</span><span class="nutri-val">4g</span></div><div class="nutri-row"><span>Proteína</span><span class="nutri-val">17g</span></div><div class="nutri-row"><span>Hierro</span><span class="nutri-val">26% VD</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">10.6g</span></div></div><div class="benefit">Beta-glucano reduce el colesterol y proporciona saciedad duradera.</div></div>
+      </div></div>
+
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="kosher-tag">Parve</span><img src="Mantequilla de  maní.png" alt="Mantequilla maní"><div class="name">Mantequilla de maní</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-back"><div><div class="back-name">Mantequilla de maní</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">588 kcal / 100g</span></div><div class="nutri-row"><span>Proteína</span><span class="nutri-val">25g</span></div><div class="nutri-row"><span>Grasas buenas</span><span class="nutri-val">50g</span></div><div class="nutri-row"><span>Magnesio</span><span class="nutri-val">39% VD</span></div><div class="nutri-row"><span>Niacina B3</span><span class="nutri-val">67% VD</span></div></div><div class="benefit">Alto en proteína y grasas saludables monoinsaturadas — saciante y nutritivo.</div></div>
+      </div></div>
+
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="kosher-tag">Parve</span><img src="Mani picado.png" alt="Maní"><div class="name">Maní picado</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-back"><div><div class="back-name">Maní picado</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">567 kcal / 100g</span></div><div class="nutri-row"><span>Proteína</span><span class="nutri-val">26g</span></div><div class="nutri-row"><span>Folato</span><span class="nutri-val">61% VD</span></div><div class="nutri-row"><span>Vitamina E</span><span class="nutri-val">45% VD</span></div><div class="nutri-row"><span>Fósforo</span><span class="nutri-val">55% VD</span></div></div><div class="benefit">Excelente aporte de folato y Vitamina E — esencial para el cerebro.</div></div>
+      </div></div>
+
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="kosher-tag">Parve</span><img src="Marañon picado.png" alt="Marañón"><div class="name">Marañón picado</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-back"><div><div class="back-name">Marañón picado</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">553 kcal / 100g</span></div><div class="nutri-row"><span>Cobre</span><span class="nutri-val">110% VD</span></div><div class="nutri-row"><span>Manganeso</span><span class="nutri-val">83% VD</span></div><div class="nutri-row"><span>Magnesio</span><span class="nutri-val">73% VD</span></div><div class="nutri-row"><span>Zinc</span><span class="nutri-val">61% VD</span></div></div><div class="benefit">La nuez más rica en minerales — esencial para huesos e inmunidad.</div></div>
+      </div></div>
+
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="kosher-tag">Parve</span><img src="Granola avena y miel.png" alt="Granola"><div class="name">Granola avena miel</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-back"><div><div class="back-name">Granola avena miel</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">471 kcal / 100g</span></div><div class="nutri-row"><span>Carbohidratos</span><span class="nutri-val">64g</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">7g</span></div><div class="nutri-row"><span>Proteína</span><span class="nutri-val">11g</span></div><div class="nutri-row"><span>Hierro</span><span class="nutri-val">20% VD</span></div></div><div class="benefit">Energía compleja de liberación lenta — ideal para empezar el día activo.</div></div>
+      </div></div>
+
+    </div>
+  </div>
+
+  <!-- TOPPINGS LÁCTEOS CR -->
+  <div class="sub-category">
+    <div class="sub-cat-header">
+      <div class="sub-cat-label">
+        <span class="sub-cat-badge" style="background:#ff4b5f">Toppings Lácteos</span>
+        <span class="sub-cat-type">Lácteo</span>
+      </div>
+      <div class="sub-cat-line"></div>
+    </div>
+    <div class="cards-grid">
+
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="kosher-tag lacteo">Lácteo</span><img src="Leche en polvo.png" alt="Leche en polvo"><div class="name">Leche en polvo</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-back" style="background:#ff4b5f"><div><div class="back-name">Leche en polvo</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">496 kcal / 100g</span></div><div class="nutri-row"><span>Calcio</span><span class="nutri-val">91% VD</span></div><div class="nutri-row"><span>Proteína</span><span class="nutri-val">26g</span></div><div class="nutri-row"><span>Vitamina D</span><span class="nutri-val">30% VD</span></div><div class="nutri-row"><span>Vitamina B12</span><span class="nutri-val">46% VD</span></div></div><div class="benefit">Concentrado lácteo con calcio esencial para huesos y dientes.</div></div>
+      </div></div>
+
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="kosher-tag lacteo">Lácteo</span><img src="Leche condensada.png" alt="Leche condensada"><div class="name">Leche condensada</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-back" style="background:#ff4b5f"><div><div class="back-name">Leche condensada</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">321 kcal / 100g</span></div><div class="nutri-row"><span>Calcio</span><span class="nutri-val">28% VD</span></div><div class="nutri-row"><span>Azúcar</span><span class="nutri-val">54g</span></div><div class="nutri-row"><span>Proteína</span><span class="nutri-val">8g</span></div><div class="nutri-row"><span>Vitamina B2</span><span class="nutri-val">20% VD</span></div></div><div class="benefit">Toque dulce lácteo — úsalo en pequeñas cantidades como complemento.</div></div>
+      </div></div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ PANAMÁ ══════════════ -->
+<div class="ingredients-section" id="section-pa">
+  <div class="section-intro">
+    <h2>🇵🇦 Panamá</h2>
+    <p>12 ingredientes certificados Kosher disponibles en nuestras tiendas panameñas.</p>
+  </div>
+
+  <!-- AÇAÍ -->
+  <div class="sub-category">
+    <div class="sub-cat-header">
+      <div class="sub-cat-label">
+        <span class="sub-cat-badge">Base</span>
+        <span class="sub-cat-type">Parve</span>
+      </div>
+      <div class="sub-cat-line"></div>
+    </div>
+    <div class="cards-grid">
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="kosher-tag">Parve</span><img src="acai.png" alt="Açaí"><div class="name">Açaí</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-back"><div><div class="back-name">Açaí</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">70 kcal / 100g</span></div><div class="nutri-row"><span>Grasas saludables</span><span class="nutri-val">5g</span></div><div class="nutri-row"><span>Proteína</span><span class="nutri-val">1.5g</span></div><div class="nutri-row"><span>Antioxidantes</span><span class="nutri-val">Alto</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">2g</span></div></div><div class="benefit">Superfruit amazónica rica en antocianinas y ácidos grasos Omega-9.</div></div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- FRUTAS PA -->
+  <div class="sub-category">
+    <div class="sub-cat-header">
+      <div class="sub-cat-label">
+        <span class="sub-cat-badge green">Frutas</span>
+        <span class="sub-cat-type">Parve</span>
+      </div>
+      <div class="sub-cat-line"></div>
+    </div>
+    <div class="cards-grid">
+
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="kosher-tag">Parve</span><img src="home_producto.png" alt="Banano"><div class="name">Banano</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-back"><div><div class="back-name">Banano</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">89 kcal / 100g</span></div><div class="nutri-row"><span>Carbohidratos</span><span class="nutri-val">23g</span></div><div class="nutri-row"><span>Potasio</span><span class="nutri-val">358mg</span></div><div class="nutri-row"><span>Vitamina B6</span><span class="nutri-val">20% VD</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">2.6g</span></div></div><div class="benefit">Excelente fuente de energía rápida y potasio para el sistema nervioso.</div></div>
+      </div></div>
+
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="kosher-tag">Parve</span><img src="Kiwi.jpg" alt="Kiwi"><div class="name">Kiwi</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-back"><div><div class="back-name">Kiwi</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">61 kcal / 100g</span></div><div class="nutri-row"><span>Vitamina C</span><span class="nutri-val">154% VD</span></div><div class="nutri-row"><span>Vitamina K</span><span class="nutri-val">38% VD</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">3g</span></div><div class="nutri-row"><span>Azúcar natural</span><span class="nutri-val">9g</span></div></div><div class="benefit">Cargado de Vitamina C — refuerza el sistema inmune y la piel.</div></div>
+      </div></div>
+
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="kosher-tag">Parve</span><img src="arandanos.jpg" alt="Arándanos"><div class="name">Arándanos</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-back"><div><div class="back-name">Arándanos</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">57 kcal / 100g</span></div><div class="nutri-row"><span>Antioxidantes</span><span class="nutri-val">Muy alto</span></div><div class="nutri-row"><span>Vitamina C</span><span class="nutri-val">16% VD</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">2.4g</span></div><div class="nutri-row"><span>Azúcar natural</span><span class="nutri-val">10g</span></div></div><div class="benefit">Líderes en antioxidantes — protegen las células y mejoran la memoria.</div></div>
+      </div></div>
+
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="kosher-tag">Parve</span><img src="Maracuya-best-berries-peru.png" alt="Maracuyá"><div class="name">Maracuyá</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-back"><div><div class="back-name">Maracuyá</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">97 kcal / 100g</span></div><div class="nutri-row"><span>Vitamina A</span><span class="nutri-val">24% VD</span></div><div class="nutri-row"><span>Vitamina C</span><span class="nutri-val">49% VD</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">10.4g</span></div><div class="nutri-row"><span>Potasio</span><span class="nutri-val">348mg</span></div></div><div class="benefit">Altísimo en fibra y con propiedades calmantes naturales.</div></div>
+      </div></div>
+
+    </div>
+  </div>
+
+  <!-- TOPPINGS PA -->
+  <div class="sub-category">
+    <div class="sub-cat-header">
+      <div class="sub-cat-label">
+        <span class="sub-cat-badge gold">Toppings</span>
+        <span class="sub-cat-type">Parve</span>
+      </div>
+      <div class="sub-cat-line"></div>
+    </div>
+    <div class="cards-grid">
+
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="kosher-tag">Parve</span><img src="semillas chía.png" alt="Chía"><div class="name">Semillas de chía</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-back"><div><div class="back-name">Semillas de chía</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">486 kcal / 100g</span></div><div class="nutri-row"><span>Omega-3</span><span class="nutri-val">17.8g</span></div><div class="nutri-row"><span>Proteína</span><span class="nutri-val">16.5g</span></div><div class="nutri-row"><span>Calcio</span><span class="nutri-val">63% VD</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">34g</span></div></div><div class="benefit">Superfood con Omega-3 vegetal, proteína completa y fibra excepcional.</div></div>
+      </div></div>
+
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="kosher-tag">Parve</span><img src="Cacao nibs.png" alt="Cacao Nibs"><div class="name">Cacao Nibs</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-back"><div><div class="back-name">Cacao Nibs</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">229 kcal / 30g</span></div><div class="nutri-row"><span>Hierro</span><span class="nutri-val">7% VD</span></div><div class="nutri-row"><span>Magnesio</span><span class="nutri-val">16% VD</span></div><div class="nutri-row"><span>Antioxidantes</span><span class="nutri-val">Muy alto</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">9g</span></div></div><div class="benefit">Cacao puro — estimula el estado de ánimo sin azúcar añadida.</div></div>
+      </div></div>
+
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="kosher-tag">Parve</span><img src="Miel.png" alt="Miel"><div class="name">Miel de abeja</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-back"><div><div class="back-name">Miel de abeja</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">304 kcal / 100g</span></div><div class="nutri-row"><span>Azúcares</span><span class="nutri-val">82g</span></div><div class="nutri-row"><span>Vitamina B2</span><span class="nutri-val">Trazas</span></div><div class="nutri-row"><span>Antioxidantes</span><span class="nutri-val">Moderado</span></div><div class="nutri-row"><span>Antimicrobiano</span><span class="nutri-val">Natural</span></div></div><div class="benefit">Endulzante natural con propiedades antibacterianas y antiinflamatorias.</div></div>
+      </div></div>
+
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="kosher-tag">Parve</span><img src="Coco rallado.png" alt="Coco"><div class="name">Coco rayado</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-back"><div><div class="back-name">Coco rayado</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">354 kcal / 100g</span></div><div class="nutri-row"><span>Grasas MCT</span><span class="nutri-val">33g</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">9g</span></div><div class="nutri-row"><span>Manganeso</span><span class="nutri-val">60% VD</span></div><div class="nutri-row"><span>Selenio</span><span class="nutri-val">14% VD</span></div></div><div class="benefit">Grasas de cadena media (MCT) de rápida absorción y energía duradera.</div></div>
+      </div></div>
+
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="kosher-tag">Parve</span><img src="Mantequilla de  maní.png" alt="Mantequilla maní"><div class="name">Mantequilla de maní</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-back"><div><div class="back-name">Mantequilla de maní</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">588 kcal / 100g</span></div><div class="nutri-row"><span>Proteína</span><span class="nutri-val">25g</span></div><div class="nutri-row"><span>Grasas buenas</span><span class="nutri-val">50g</span></div><div class="nutri-row"><span>Magnesio</span><span class="nutri-val">39% VD</span></div><div class="nutri-row"><span>Niacina B3</span><span class="nutri-val">67% VD</span></div></div><div class="benefit">Alto en proteína y grasas saludables monoinsaturadas — saciante y nutritivo.</div></div>
+      </div></div>
+
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="kosher-tag">Parve</span><img src="Granola avena y miel.png" alt="Granola"><div class="name">Granola avena miel</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-back"><div><div class="back-name">Granola avena miel</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">471 kcal / 100g</span></div><div class="nutri-row"><span>Carbohidratos</span><span class="nutri-val">64g</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">7g</span></div><div class="nutri-row"><span>Proteína</span><span class="nutri-val">11g</span></div><div class="nutri-row"><span>Hierro</span><span class="nutri-val">20% VD</span></div></div><div class="benefit">Energía compleja de liberación lenta — ideal para empezar el día activo.</div></div>
+      </div></div>
+
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Oakberry Costa Rica &amp; Panamá &nbsp;|&nbsp; <a href="https://oakberry.cr" target="_blank">oakberry.cr</a></p>
+</footer>
+
+<script>
+function selectCountry(country) {
+  // Update buttons
+  document.querySelectorAll('.country-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('btn-' + country).classList.add('active');
+
+  // Show/hide sections
+  document.querySelectorAll('.ingredients-section').forEach(s => s.classList.remove('visible'));
+  document.getElementById('section-' + country).classList.add('visible');
+
+  // Scroll to ingredients
+  setTimeout(() => {
+    document.getElementById('section-' + country).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
+}
+</script>
 </body>
 </html>
