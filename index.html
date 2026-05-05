@@ -73,7 +73,7 @@ nav a:hover { color: #fff; }
   transition: color .2s;
   display: flex; align-items: center; gap: 6px;
 }
-.dropdown:hover > span { color: #fff; }
+.dropdown.open > span { color: #fff; }
 
 .dropdown-content {
   display: none;
@@ -88,7 +88,7 @@ nav a:hover { color: #fff; }
   animation: fadeDown .2s ease;
 }
 @keyframes fadeDown { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
-.dropdown:hover .dropdown-content { display: block; }
+.dropdown.open .dropdown-content { display: block; }
 
 .dropdown-content a {
   display: flex;
@@ -485,7 +485,7 @@ footer a { color: var(--oak-blueberry); text-decoration: none; }
   <nav>
     <a href="https://oakberry.cr" target="_blank">Web</a>
     <div class="dropdown">
-      <span>Ubicaciones ▾</span>
+      <span onclick="toggleDropdown(event)">Ubicaciones ▾</span>
       <div class="dropdown-content">
         <a href="https://www.google.com/maps?sca_esv=4984aa9a092ab98a&q=city+mall&source=lnms&entry=mc" target="_blank">City Mall — Alajuela</a>
         <a href="https://www.google.com/maps/place/Oakberry+A%C3%A7ai/@9.9368674,-84.156629,17z" target="_blank">Guachipelín — Escazú</a>
@@ -498,7 +498,7 @@ footer a { color: var(--oak-blueberry); text-decoration: none; }
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-badge" onclick="document.getElementById('cert-modal').style.display='flex'" style="cursor:pointer;">✡ Certificado Kosher <span style="font-size:10px;opacity:.7;margin-left:4px;">ver →</span></div>
+  <div class="hero-badge" onclick="certGo(1);document.getElementById('cert-modal').style.display='flex'" style="cursor:pointer;">✡ Certificado Kosher <span style="font-size:10px;opacity:.7;margin-left:4px;">ver →</span></div>
   <h1>Ingredientes<br><em>Aprobados</em> Kosher</h1>
   <p>Seleccioná tu país para ver los ingredientes certificados disponibles en tu ubicación.</p>
 
@@ -831,7 +831,7 @@ function selectCountry(country) {
     </div>
     <!-- Image -->
     <div style="background:#f5eee0;padding:0;">
-      <img id="cert-img" src="certificado-kosher-p1.jpg" alt="Certificado Kosher" style="width:100%;display:block;">
+      <img id="cert-img" src="certificado-kosher-p1.jpg" alt="Certificado Kosher" style="width:100%;display:block;" onerror="this.style.padding='40px';this.alt='Error cargando: '+this.src;">
     </div>
     <!-- Navigation -->
     <div style="background:white;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid #ede4d6;">
@@ -856,6 +856,17 @@ function certGo(n) {
 function certNav(dir) {
   certGo(Math.max(1, Math.min(2, certPage + dir)));
 }
+</script>
+
+<script>
+function toggleDropdown(e) {
+  e.stopPropagation();
+  var dd = e.target.closest('.dropdown');
+  dd.classList.toggle('open');
+}
+document.addEventListener('click', function() {
+  document.querySelectorAll('.dropdown.open').forEach(function(d){ d.classList.remove('open'); });
+});
 </script>
 </body>
 </html>
