@@ -602,6 +602,69 @@ footer a { color: var(--oak-blueberry); text-decoration: none; }
   .benefits-right { flex: none; width: 100%; max-width: 320px; }
   .benefits-grid { grid-template-columns: 1fr; }
 }
+
+/* ── DYNAMIC HEADER ─────────────────────────────────── */
+header {
+  transition: background .3s ease, box-shadow .3s ease;
+}
+header.scrolled {
+  background: rgba(40, 5, 50, 0.92);
+  box-shadow: 0 4px 30px rgba(0,0,0,.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Hero particle canvas */
+#hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Floating badge animation */
+@keyframes badgeFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+.hero-badge { animation: badgeFloat 3s ease-in-out infinite; }
+
+/* Hero content entrance */
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-badge  { animation: badgeFloat 3s ease-in-out infinite, heroFadeUp .7s ease both; }
+.hero h1     { animation: heroFadeUp .7s .15s ease both; }
+.hero p      { animation: heroFadeUp .7s .3s ease both; }
+.country-selector { animation: heroFadeUp .7s .45s ease both; }
+
+/* Nav link underline sweep */
+nav a {
+  position: relative;
+  overflow: hidden;
+}
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: var(--oak-granola);
+  transition: width .25s ease;
+}
+nav a:hover::after { width: 100%; }
+
+/* Logo subtle pulse on load */
+@keyframes logoPop {
+  0%   { opacity: 0; transform: scale(.85); }
+  70%  { transform: scale(1.04); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.logo img { animation: logoPop .6s ease both; }
 </style>
 </head>
 <body>
@@ -626,13 +689,14 @@ footer a { color: var(--oak-blueberry); text-decoration: none; }
 </header>
 
 <!-- HERO -->
-<section class="hero">
-  <img src="WHITE%20OAKBERRY%20A%C3%87AI%20(1).png" alt="" style="height:120px;width:auto;max-width:90%;margin-bottom:28px;position:relative;display:block;margin-left:auto;margin-right:auto;">
-  <div class="hero-badge">✡ Certificado Kosher</div>
-  <h1>Ingredientes<br><em>Aprobados</em> Kosher</h1>
-  <p>Seleccioná tu país para ver los ingredientes certificados disponibles en tu ubicación.</p>
+<section class="hero" style="position:relative;">
+  <canvas id="hero-canvas"></canvas>
+  <img style="position:relative;z-index:1;" src="WHITE%20OAKBERRY%20A%C3%87AI%20(1).png" alt="" style="height:120px;width:auto;max-width:90%;margin-bottom:28px;position:relative;display:block;margin-left:auto;margin-right:auto;">
+  <div class="hero-badge" style="position:relative;z-index:1;">✡ Certificado Kosher</div>
+  <h1 style="position:relative;z-index:1;">Ingredientes<br><em>Aprobados</em> Kosher</h1>
+  <p style="position:relative;z-index:1;">Seleccioná tu país para ver los ingredientes certificados disponibles en tu ubicación.</p>
 
-  <div class="country-selector">
+  <div class="country-selector" style="position:relative;z-index:1;">
     <button class="country-btn" onclick="selectCountry('cr')" id="btn-cr">
       <span class="flag">🇨🇷</span> Costa Rica
     </button>
@@ -1053,5 +1117,62 @@ document.querySelectorAll('.benefit-item, .bowl-img').forEach(function(el, i) {
   }
   observer.observe(el);
 });
+</script>
+
+<script>
+/* ── SCROLL HEADER ── */
+window.addEventListener('scroll', function() {
+  var h = document.querySelector('header');
+  if (window.scrollY > 40) h.classList.add('scrolled');
+  else h.classList.remove('scrolled');
+});
+
+/* ── PARTICLE CANVAS ── */
+(function() {
+  var canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var particles = [];
+  var W, H;
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  var colors = ['rgba(234,165,94,', 'rgba(91,148,183,', 'rgba(255,75,95,', 'rgba(255,255,255,'];
+
+  for (var i = 0; i < 55; i++) {
+    particles.push({
+      x: Math.random() * 1400,
+      y: Math.random() * 700,
+      r: Math.random() * 2 + .5,
+      dx: (Math.random() - .5) * .35,
+      dy: (Math.random() - .5) * .35,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      alpha: Math.random() * .4 + .1
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(function(p) {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.color + p.alpha + ')';
+      ctx.fill();
+      p.x += p.dx;
+      p.y += p.dy;
+      if (p.x < 0) p.x = W;
+      if (p.x > W) p.x = 0;
+      if (p.y < 0) p.y = H;
+      if (p.y > H) p.y = 0;
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
 </script>
 </body>
