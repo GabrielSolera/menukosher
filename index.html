@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Oakberry — Ingredientes Kosher</title>
+<title>Oakberry Açaí</title>
 <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,600;0,700;1,600;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&display=swap" rel="stylesheet">
 <style>
@@ -50,7 +50,7 @@ header {
   height: 70px;
 }
 
-.logo img { height: 44px; width: auto; filter: brightness(0) invert(1); }
+.logo img { height: 64px; width: auto; filter: brightness(0) invert(1); }
 
 nav { display: flex; align-items: center; gap: 36px; }
 
@@ -498,7 +498,7 @@ footer a { color: var(--oak-blueberry); text-decoration: none; }
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-badge">✡ Certificado Kosher</div>
+  <div class="hero-badge" onclick="document.getElementById('cert-modal').style.display='flex'" style="cursor:pointer;">✡ Certificado Kosher <span style="font-size:10px;opacity:.7;margin-left:4px;">ver →</span></div>
   <h1>Ingredientes<br><em>Aprobados</em> Kosher</h1>
   <p>Seleccioná tu país para ver los ingredientes certificados disponibles en tu ubicación.</p>
 
@@ -812,6 +812,49 @@ function selectCountry(country) {
   setTimeout(() => {
     document.getElementById('section-' + country).scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, 100);
+}
+</script>
+
+<!-- CERT MODAL -->
+<div id="cert-modal" onclick="this.style.display='none'" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;align-items:center;justify-content:center;padding:20px;">
+  <div onclick="event.stopPropagation()" style="position:relative;max-width:780px;width:100%;background:white;border-radius:20px;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.5);">
+    <!-- Header -->
+    <div style="background:#4a1f60;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;">
+      <div style="color:white;font-family:'DM Sans',sans-serif;">
+        <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;opacity:.7;margin-bottom:2px;">Oakberry Costa Rica</div>
+        <div style="font-size:16px;font-weight:700;">Certificado Kashrut 2025–2026</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span id="cert-page-label" style="color:rgba(255,255,255,.6);font-size:13px;font-family:'DM Sans',sans-serif;">Página 1 de 2</span>
+        <button onclick="document.getElementById('cert-modal').style.display='none'" style="background:rgba(255,255,255,.15);border:none;color:white;width:32px;height:32px;border-radius:50%;font-size:18px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;">✕</button>
+      </div>
+    </div>
+    <!-- Image -->
+    <div style="background:#f5eee0;padding:0;">
+      <img id="cert-img" src="certificado-kosher-p1.jpg" alt="Certificado Kosher" style="width:100%;display:block;">
+    </div>
+    <!-- Navigation -->
+    <div style="background:white;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid #ede4d6;">
+      <button onclick="certNav(-1)" style="background:#f5eee0;border:1px solid #ddd4c4;color:#4a1f60;padding:8px 20px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;">← Parve</button>
+      <div style="display:flex;gap:8px;">
+        <span id="dot-1" onclick="certGo(1)" style="width:10px;height:10px;border-radius:50%;background:#4a1f60;cursor:pointer;display:inline-block;"></span>
+        <span id="dot-2" onclick="certGo(2)" style="width:10px;height:10px;border-radius:50%;background:#ddd4c4;cursor:pointer;display:inline-block;"></span>
+      </div>
+      <button onclick="certNav(1)" style="background:#4a1f60;border:none;color:white;padding:8px 20px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;">Lácteo →</button>
+    </div>
+  </div>
+</div>
+<script>
+var certPage = 1;
+function certGo(n) {
+  certPage = n;
+  document.getElementById('cert-img').src = 'certificado-kosher-p' + n + '.jpg';
+  document.getElementById('cert-page-label').textContent = 'Página ' + n + ' de 2';
+  document.getElementById('dot-1').style.background = n===1 ? '#4a1f60' : '#ddd4c4';
+  document.getElementById('dot-2').style.background = n===2 ? '#4a1f60' : '#ddd4c4';
+}
+function certNav(dir) {
+  certGo(Math.max(1, Math.min(2, certPage + dir)));
 }
 </script>
 </body>
