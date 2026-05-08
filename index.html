@@ -712,7 +712,15 @@ nav a:hover::after { width: 100%; }
     <img src="oakberry-logo.png" alt="Oakberry Açaí">
   </div>
   <nav>
-    <a href="https://oakberry.cr" target="_blank">Web</a>
+    <!-- Web links -->
+    <div class="dropdown">
+      <span onclick="toggleDropdown(event)">Web ▾</span>
+      <div class="dropdown-content">
+        <a href="https://oakberry.cr" target="_blank">🇨🇷 oakberry.cr</a>
+        <a href="https://oakberry.com.pa" target="_blank">🇵🇦 oakberry.com.pa</a>
+      </div>
+    </div>
+    <!-- Ubicaciones -->
     <div class="dropdown">
       <span onclick="toggleDropdown(event)">Ubicaciones ▾</span>
       <div class="dropdown-content">
