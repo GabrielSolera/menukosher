@@ -253,7 +253,7 @@ nav a:hover { color: #fff; }
 .kosher-item a.ver-cert:hover { color: var(--oak-strawberry); border-color: var(--oak-strawberry); }
 
 .kosher-item img {
-  height: 52px;
+  height: 80px;
   width: auto;
 }
 
@@ -445,15 +445,50 @@ nav a:hover { color: #fff; }
 /* Kosher tag on card */
 .flip-front .kosher-tag {
   position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 52px;
-  height: 52px;
+  top: 0;
+  right: 0;
+  width: 64px;
+  height: 64px;
   object-fit: contain;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  clip-path: none;
+  z-index: 2;
+}
+
+/* Folded corner container */
+.kosher-corner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 72px;
+  height: 72px;
+  z-index: 2;
+  overflow: hidden;
+  border-radius: 0 16px 0 0;
+}
+
+.kosher-corner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 72px;
+  height: 72px;
   background: white;
-  border-radius: 50%;
-  padding: 4px;
-  box-shadow: 0 1px 8px rgba(0,0,0,.15);
+  clip-path: polygon(100% 0, 100% 100%, 0 0);
+  box-shadow: -2px 2px 8px rgba(0,0,0,.1);
+}
+
+.kosher-corner img {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
 }
 
 /* ── DIVIDER ─────────────────────────────────── */
@@ -681,10 +716,14 @@ nav a:hover::after { width: 100%; }
     <div class="dropdown">
       <span onclick="toggleDropdown(event)">Ubicaciones ▾</span>
       <div class="dropdown-content">
+        <div style="padding:8px 20px 4px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#7d5596;">🇨🇷 Costa Rica</div>
         <a href="https://www.google.com/maps?sca_esv=4984aa9a092ab98a&q=city+mall&source=lnms&entry=mc" target="_blank">City Mall — Alajuela</a>
         <a href="https://www.google.com/maps/place/Oakberry+A%C3%A7ai/@9.9368674,-84.156629,17z" target="_blank">Guachipelín — Escazú</a>
         <a href="https://www.google.com/maps/place/OakBerry+A%C3%A7a%C3%AD+Avenida+Escaz%C3%BA/@9.9383282,-84.1459135,17z" target="_blank">Avenida Escazú</a>
         <a href="https://www.google.com/maps/place/Santa+Ana+Town+Center/@9.9340673,-84.1895976,17z" target="_blank">Santa Ana Town Center</a>
+        <div style="margin:4px 20px;height:1px;background:#ede4d6;"></div>
+        <div style="padding:8px 20px 4px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#7d5596;">🇵🇦 Panamá</div>
+        <a href="https://www.google.com/maps/place/La+Peatonal+68/@8.9943381,-79.5138256,17z" target="_blank">San Francisco C68 — Ciudad de Panamá</a>
       </div>
     </div>
   </nav>
@@ -809,7 +848,7 @@ nav a:hover::after { width: 100%; }
       <div class="flip-card">
         <div class="flip-inner">
           <div class="flip-front">
-            <img class="kosher-tag" src="SELLO%20KASHRUT%20PARVE%20PNG.png" alt="Kosher Parve">
+            <div class="kosher-corner"><img src="SELLO%20KASHRUT%20PARVE%20PNG.png" alt="Kosher Parve"></div>
             <img src="acai.png" alt="Açaí">
             <div class="name">Açaí</div>
             <div class="hint">Hover para info nutricional</div>
@@ -842,27 +881,27 @@ nav a:hover::after { width: 100%; }
     <div class="cards-grid">
 
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="SELLO%20KASHRUT%20PARVE%20PNG.png" alt="Kosher Parve"><img src="home_producto.png" alt="Banano"><div class="name">Banano</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="SELLO%20KASHRUT%20PARVE%20PNG.png" alt="Kosher Parve"></div><img src="home_producto.png" alt="Banano"><div class="name">Banano</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back"><div><div class="back-name">Banano</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">89 kcal / 100g</span></div><div class="nutri-row"><span>Carbohidratos</span><span class="nutri-val">23g</span></div><div class="nutri-row"><span>Potasio</span><span class="nutri-val">358mg</span></div><div class="nutri-row"><span>Vitamina B6</span><span class="nutri-val">20% VD</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">2.6g</span></div></div><div class="benefit">Excelente fuente de energía rápida y potasio para el sistema nervioso.</div></div>
       </div></div>
 
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="SELLO%20KASHRUT%20PARVE%20PNG.png" alt="Kosher Parve"><img src="Kiwi.jpg" alt="Kiwi"><div class="name">Kiwi</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="SELLO%20KASHRUT%20PARVE%20PNG.png" alt="Kosher Parve"></div><img src="Kiwi.jpg" alt="Kiwi"><div class="name">Kiwi</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back"><div><div class="back-name">Kiwi</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">61 kcal / 100g</span></div><div class="nutri-row"><span>Vitamina C</span><span class="nutri-val">154% VD</span></div><div class="nutri-row"><span>Vitamina K</span><span class="nutri-val">38% VD</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">3g</span></div><div class="nutri-row"><span>Azúcar natural</span><span class="nutri-val">9g</span></div></div><div class="benefit">Cargado de Vitamina C — refuerza el sistema inmune y la piel.</div></div>
       </div></div>
 
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="SELLO%20KASHRUT%20PARVE%20PNG.png" alt="Kosher Parve"><img src="arandanos.jpg" alt="Arándanos"><div class="name">Arándanos</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="SELLO%20KASHRUT%20PARVE%20PNG.png" alt="Kosher Parve"></div><img src="arandanos.jpg" alt="Arándanos"><div class="name">Arándanos</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back"><div><div class="back-name">Arándanos</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">57 kcal / 100g</span></div><div class="nutri-row"><span>Antioxidantes</span><span class="nutri-val">Muy alto</span></div><div class="nutri-row"><span>Vitamina C</span><span class="nutri-val">16% VD</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">2.4g</span></div><div class="nutri-row"><span>Azúcar natural</span><span class="nutri-val">10g</span></div></div><div class="benefit">Líderes en antioxidantes — protegen las células y mejoran la memoria.</div></div>
       </div></div>
 
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="SELLO%20KASHRUT%20PARVE%20PNG.png" alt="Kosher Parve"><img src="FRESA2-scaled.jpg" alt="Fresas"><div class="name">Fresas</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="SELLO%20KASHRUT%20PARVE%20PNG.png" alt="Kosher Parve"></div><img src="FRESA2-scaled.jpg" alt="Fresas"><div class="name">Fresas</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back"><div><div class="back-name">Fresas</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">32 kcal / 100g</span></div><div class="nutri-row"><span>Vitamina C</span><span class="nutri-val">97% VD</span></div><div class="nutri-row"><span>Manganeso</span><span class="nutri-val">18% VD</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">2g</span></div><div class="nutri-row"><span>Azúcar natural</span><span class="nutri-val">4.9g</span></div></div><div class="benefit">Bajas en calorías, altas en Vitamina C y polifenoles antiinflamatorios.</div></div>
       </div></div>
 
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="SELLO%20KASHRUT%20PARVE%20PNG.png" alt="Kosher Parve"><img src="Maracuya-best-berries-peru.png" alt="Maracuyá"><div class="name">Maracuyá</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="SELLO%20KASHRUT%20PARVE%20PNG.png" alt="Kosher Parve"></div><img src="Maracuya-best-berries-peru.png" alt="Maracuyá"><div class="name">Maracuyá</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back"><div><div class="back-name">Maracuyá</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">97 kcal / 100g</span></div><div class="nutri-row"><span>Vitamina A</span><span class="nutri-val">24% VD</span></div><div class="nutri-row"><span>Vitamina C</span><span class="nutri-val">49% VD</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">10.4g</span></div><div class="nutri-row"><span>Potasio</span><span class="nutri-val">348mg</span></div></div><div class="benefit">Altísimo en fibra y con propiedades calmantes naturales.</div></div>
       </div></div>
 
@@ -881,47 +920,47 @@ nav a:hover::after { width: 100%; }
     <div class="cards-grid">
 
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="SELLO%20KASHRUT%20PARVE%20PNG.png" alt="Kosher Parve"><img src="semillas-chia.png" alt="Chía"><div class="name">Semillas de chía</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="SELLO%20KASHRUT%20PARVE%20PNG.png" alt="Kosher Parve"></div><img src="semillas-chia.png" alt="Chía"><div class="name">Semillas de chía</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back"><div><div class="back-name">Semillas de chía</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">486 kcal / 100g</span></div><div class="nutri-row"><span>Omega-3</span><span class="nutri-val">17.8g</span></div><div class="nutri-row"><span>Proteína</span><span class="nutri-val">16.5g</span></div><div class="nutri-row"><span>Calcio</span><span class="nutri-val">63% VD</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">34g</span></div></div><div class="benefit">Superfood con Omega-3 vegetal, proteína completa y fibra excepcional.</div></div>
       </div></div>
 
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="SELLO%20KASHRUT%20PARVE%20PNG.png" alt="Kosher Parve"><img src="Cacao%20nibs.png" alt="Cacao Nibs"><div class="name">Cacao Nibs</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="SELLO%20KASHRUT%20PARVE%20PNG.png" alt="Kosher Parve"></div><img src="Cacao%20nibs.png" alt="Cacao Nibs"><div class="name">Cacao Nibs</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back"><div><div class="back-name">Cacao Nibs</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">229 kcal / 30g</span></div><div class="nutri-row"><span>Hierro</span><span class="nutri-val">7% VD</span></div><div class="nutri-row"><span>Magnesio</span><span class="nutri-val">16% VD</span></div><div class="nutri-row"><span>Antioxidantes</span><span class="nutri-val">Muy alto</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">9g</span></div></div><div class="benefit">Cacao puro — estimula el estado de ánimo sin azúcar añadida.</div></div>
       </div></div>
 
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="SELLO%20KASHRUT%20PARVE%20PNG.png" alt="Kosher Parve"><img src="Miel.png" alt="Miel"><div class="name">Miel de abeja</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="SELLO%20KASHRUT%20PARVE%20PNG.png" alt="Kosher Parve"></div><img src="Miel.png" alt="Miel"><div class="name">Miel de abeja</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back"><div><div class="back-name">Miel de abeja</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">304 kcal / 100g</span></div><div class="nutri-row"><span>Azúcares</span><span class="nutri-val">82g</span></div><div class="nutri-row"><span>Vitamina B2</span><span class="nutri-val">Trazas</span></div><div class="nutri-row"><span>Antioxidantes</span><span class="nutri-val">Moderado</span></div><div class="nutri-row"><span>Antimicrobiano</span><span class="nutri-val">Natural</span></div></div><div class="benefit">Endulzante natural con propiedades antibacterianas y antiinflamatorias.</div></div>
       </div></div>
 
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="SELLO%20KASHRUT%20PARVE%20PNG.png" alt="Kosher Parve"><img src="Coco%20rallado.png" alt="Coco"><div class="name">Coco rayado</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="SELLO%20KASHRUT%20PARVE%20PNG.png" alt="Kosher Parve"></div><img src="Coco%20rallado.png" alt="Coco"><div class="name">Coco rayado</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back"><div><div class="back-name">Coco rayado</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">354 kcal / 100g</span></div><div class="nutri-row"><span>Grasas MCT</span><span class="nutri-val">33g</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">9g</span></div><div class="nutri-row"><span>Manganeso</span><span class="nutri-val">60% VD</span></div><div class="nutri-row"><span>Selenio</span><span class="nutri-val">14% VD</span></div></div><div class="benefit">Grasas de cadena media (MCT) de rápida absorción y energía duradera.</div></div>
       </div></div>
 
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="SELLO%20KASHRUT%20PARVE%20PNG.png" alt="Kosher Parve"><img src="Avena.png" alt="Avena"><div class="name">Avena en hojuela</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="SELLO%20KASHRUT%20PARVE%20PNG.png" alt="Kosher Parve"></div><img src="Avena.png" alt="Avena"><div class="name">Avena en hojuela</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back"><div><div class="back-name">Avena en hojuela</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">389 kcal / 100g</span></div><div class="nutri-row"><span>Beta-glucano</span><span class="nutri-val">4g</span></div><div class="nutri-row"><span>Proteína</span><span class="nutri-val">17g</span></div><div class="nutri-row"><span>Hierro</span><span class="nutri-val">26% VD</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">10.6g</span></div></div><div class="benefit">Beta-glucano reduce el colesterol y proporciona saciedad duradera.</div></div>
       </div></div>
 
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="SELLO%20KASHRUT%20PARVE%20PNG.png" alt="Kosher Parve"><img src="mantequilla-mani.png" alt="Mantequilla maní"><div class="name">Mantequilla de maní</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="SELLO%20KASHRUT%20PARVE%20PNG.png" alt="Kosher Parve"></div><img src="mantequilla-mani.png" alt="Mantequilla maní"><div class="name">Mantequilla de maní</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back"><div><div class="back-name">Mantequilla de maní</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">588 kcal / 100g</span></div><div class="nutri-row"><span>Proteína</span><span class="nutri-val">25g</span></div><div class="nutri-row"><span>Grasas buenas</span><span class="nutri-val">50g</span></div><div class="nutri-row"><span>Magnesio</span><span class="nutri-val">39% VD</span></div><div class="nutri-row"><span>Niacina B3</span><span class="nutri-val">67% VD</span></div></div><div class="benefit">Alto en proteína y grasas saludables monoinsaturadas — saciante y nutritivo.</div></div>
       </div></div>
 
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="SELLO%20KASHRUT%20PARVE%20PNG.png" alt="Kosher Parve"><img src="Mani%20picado.png" alt="Maní"><div class="name">Maní picado</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="SELLO%20KASHRUT%20PARVE%20PNG.png" alt="Kosher Parve"></div><img src="Mani%20picado.png" alt="Maní"><div class="name">Maní picado</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back"><div><div class="back-name">Maní picado</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">567 kcal / 100g</span></div><div class="nutri-row"><span>Proteína</span><span class="nutri-val">26g</span></div><div class="nutri-row"><span>Folato</span><span class="nutri-val">61% VD</span></div><div class="nutri-row"><span>Vitamina E</span><span class="nutri-val">45% VD</span></div><div class="nutri-row"><span>Fósforo</span><span class="nutri-val">55% VD</span></div></div><div class="benefit">Excelente aporte de folato y Vitamina E — esencial para el cerebro.</div></div>
       </div></div>
 
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="SELLO%20KASHRUT%20PARVE%20PNG.png" alt="Kosher Parve"><img src="maranon-picado.png" alt="Marañón"><div class="name">Marañón picado</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="SELLO%20KASHRUT%20PARVE%20PNG.png" alt="Kosher Parve"></div><img src="maranon-picado.png" alt="Marañón"><div class="name">Marañón picado</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back"><div><div class="back-name">Marañón picado</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">553 kcal / 100g</span></div><div class="nutri-row"><span>Cobre</span><span class="nutri-val">110% VD</span></div><div class="nutri-row"><span>Manganeso</span><span class="nutri-val">83% VD</span></div><div class="nutri-row"><span>Magnesio</span><span class="nutri-val">73% VD</span></div><div class="nutri-row"><span>Zinc</span><span class="nutri-val">61% VD</span></div></div><div class="benefit">La nuez más rica en minerales — esencial para huesos e inmunidad.</div></div>
       </div></div>
 
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="SELLO%20KASHRUT%20PARVE%20PNG.png" alt="Kosher Parve"><img src="Granola%20avena%20y%20miel.png" alt="Granola"><div class="name">Granola avena miel</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="SELLO%20KASHRUT%20PARVE%20PNG.png" alt="Kosher Parve"></div><img src="Granola%20avena%20y%20miel.png" alt="Granola"><div class="name">Granola avena miel</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back"><div><div class="back-name">Granola avena miel</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">471 kcal / 100g</span></div><div class="nutri-row"><span>Carbohidratos</span><span class="nutri-val">64g</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">7g</span></div><div class="nutri-row"><span>Proteína</span><span class="nutri-val">11g</span></div><div class="nutri-row"><span>Hierro</span><span class="nutri-val">20% VD</span></div></div><div class="benefit">Energía compleja de liberación lenta — ideal para empezar el día activo.</div></div>
       </div></div>
 
@@ -940,12 +979,12 @@ nav a:hover::after { width: 100%; }
     <div class="cards-grid">
 
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="Sellos%20Kosher%20lacteo.png" alt="Kosher Lácteo"><img src="Leche%20en%20polvo.png" alt="Leche en polvo"><div class="name">Leche en polvo</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="Sellos%20Kosher%20lacteo.png" alt="Kosher Lácteo"></div><img src="Leche%20en%20polvo.png" alt="Leche en polvo"><div class="name">Leche en polvo</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back" style="background:#ff4b5f"><div><div class="back-name">Leche en polvo</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">496 kcal / 100g</span></div><div class="nutri-row"><span>Calcio</span><span class="nutri-val">91% VD</span></div><div class="nutri-row"><span>Proteína</span><span class="nutri-val">26g</span></div><div class="nutri-row"><span>Vitamina D</span><span class="nutri-val">30% VD</span></div><div class="nutri-row"><span>Vitamina B12</span><span class="nutri-val">46% VD</span></div></div><div class="benefit">Concentrado lácteo con calcio esencial para huesos y dientes.</div></div>
       </div></div>
 
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="Sellos%20Kosher%20lacteo.png" alt="Kosher Lácteo"><img src="Leche%20condensada.png" alt="Leche condensada"><div class="name">Leche condensada</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="Sellos%20Kosher%20lacteo.png" alt="Kosher Lácteo"></div><img src="Leche%20condensada.png" alt="Leche condensada"><div class="name">Leche condensada</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back" style="background:#ff4b5f"><div><div class="back-name">Leche condensada</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">321 kcal / 100g</span></div><div class="nutri-row"><span>Calcio</span><span class="nutri-val">28% VD</span></div><div class="nutri-row"><span>Azúcar</span><span class="nutri-val">54g</span></div><div class="nutri-row"><span>Proteína</span><span class="nutri-val">8g</span></div><div class="nutri-row"><span>Vitamina B2</span><span class="nutri-val">20% VD</span></div></div><div class="benefit">Toque dulce lácteo — úsalo en pequeñas cantidades como complemento.</div></div>
       </div></div>
 
@@ -968,7 +1007,7 @@ nav a:hover::after { width: 100%; }
     </div>
     <div class="cards-grid">
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="kosher-pa-parve.png" alt="Kosher Parve"><img src="acai.png" alt="Açaí"><div class="name">Açaí</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="kosher-pa-parve.png" alt="Kosher Parve"></div><img src="acai.png" alt="Açaí"><div class="name">Açaí</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back"><div><div class="back-name">Açaí</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">70 kcal/100g</span></div><div class="nutri-row"><span>Grasas saludables</span><span class="nutri-val">5g</span></div><div class="nutri-row"><span>Proteína</span><span class="nutri-val">1.5g</span></div><div class="nutri-row"><span>Antioxidantes</span><span class="nutri-val">Alto</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">2g</span></div></div><div class="benefit">Superfruit amazónica rica en antocianinas y ácidos grasos Omega-9.</div></div>
       </div></div>
     </div>
@@ -982,23 +1021,23 @@ nav a:hover::after { width: 100%; }
     </div>
     <div class="cards-grid">
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="kosher-pa-parve.png" alt="Kosher Parve"><img src="home_producto.png" alt="Banano"><div class="name">Banano</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="kosher-pa-parve.png" alt="Kosher Parve"></div><img src="home_producto.png" alt="Banano"><div class="name">Banano</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back"><div><div class="back-name">Banano</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">89 kcal/100g</span></div><div class="nutri-row"><span>Carbohidratos</span><span class="nutri-val">23g</span></div><div class="nutri-row"><span>Potasio</span><span class="nutri-val">358mg</span></div><div class="nutri-row"><span>Vitamina B6</span><span class="nutri-val">20% VD</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">2.6g</span></div></div><div class="benefit">Excelente fuente de energía rápida y potasio para el sistema nervioso.</div></div>
       </div></div>
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="kosher-pa-parve.png" alt="Kosher Parve"><img src="Kiwi.jpg" alt="Kiwi"><div class="name">Kiwi</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="kosher-pa-parve.png" alt="Kosher Parve"></div><img src="Kiwi.jpg" alt="Kiwi"><div class="name">Kiwi</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back"><div><div class="back-name">Kiwi</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">61 kcal/100g</span></div><div class="nutri-row"><span>Vitamina C</span><span class="nutri-val">154% VD</span></div><div class="nutri-row"><span>Vitamina K</span><span class="nutri-val">38% VD</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">3g</span></div><div class="nutri-row"><span>Azúcar natural</span><span class="nutri-val">9g</span></div></div><div class="benefit">Cargado de Vitamina C — refuerza el sistema inmune y la piel.</div></div>
       </div></div>
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="kosher-pa-parve.png" alt="Kosher Parve"><img src="arandanos.jpg" alt="Arándanos"><div class="name">Arándanos</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="kosher-pa-parve.png" alt="Kosher Parve"></div><img src="arandanos.jpg" alt="Arándanos"><div class="name">Arándanos</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back"><div><div class="back-name">Arándanos</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">57 kcal/100g</span></div><div class="nutri-row"><span>Antioxidantes</span><span class="nutri-val">Muy alto</span></div><div class="nutri-row"><span>Vitamina C</span><span class="nutri-val">16% VD</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">2.4g</span></div><div class="nutri-row"><span>Azúcar natural</span><span class="nutri-val">10g</span></div></div><div class="benefit">Líderes en antioxidantes — protegen las células y mejoran la memoria.</div></div>
       </div></div>
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="kosher-pa-parve.png" alt="Kosher Parve"><img src="FRESA2-scaled.jpg" alt="Fresas"><div class="name">Fresas</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="kosher-pa-parve.png" alt="Kosher Parve"></div><img src="FRESA2-scaled.jpg" alt="Fresas"><div class="name">Fresas</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back"><div><div class="back-name">Fresas</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">32 kcal/100g</span></div><div class="nutri-row"><span>Vitamina C</span><span class="nutri-val">97% VD</span></div><div class="nutri-row"><span>Manganeso</span><span class="nutri-val">18% VD</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">2g</span></div><div class="nutri-row"><span>Azúcar natural</span><span class="nutri-val">4.9g</span></div></div><div class="benefit">Bajas en calorías, altas en Vitamina C y polifenoles antiinflamatorios.</div></div>
       </div></div>
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="kosher-pa-parve.png" alt="Kosher Parve"><img src="Maracuya-best-berries-peru.png" alt="Maracuyá"><div class="name">Maracuyá</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="kosher-pa-parve.png" alt="Kosher Parve"></div><img src="Maracuya-best-berries-peru.png" alt="Maracuyá"><div class="name">Maracuyá</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back"><div><div class="back-name">Maracuyá</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">97 kcal/100g</span></div><div class="nutri-row"><span>Vitamina A</span><span class="nutri-val">24% VD</span></div><div class="nutri-row"><span>Vitamina C</span><span class="nutri-val">49% VD</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">10.4g</span></div><div class="nutri-row"><span>Potasio</span><span class="nutri-val">348mg</span></div></div><div class="benefit">Altísimo en fibra y con propiedades calmantes naturales.</div></div>
       </div></div>
     </div>
@@ -1012,43 +1051,43 @@ nav a:hover::after { width: 100%; }
     </div>
     <div class="cards-grid">
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="kosher-pa-parve.png" alt="Kosher Parve"><img src="semillas-chia.png" alt="Chía"><div class="name">Semillas de chía</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="kosher-pa-parve.png" alt="Kosher Parve"></div><img src="semillas-chia.png" alt="Chía"><div class="name">Semillas de chía</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back"><div><div class="back-name">Semillas de chía</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">486 kcal/100g</span></div><div class="nutri-row"><span>Omega-3</span><span class="nutri-val">17.8g</span></div><div class="nutri-row"><span>Proteína</span><span class="nutri-val">16.5g</span></div><div class="nutri-row"><span>Calcio</span><span class="nutri-val">63% VD</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">34g</span></div></div><div class="benefit">Superfood con Omega-3 vegetal, proteína completa y fibra excepcional.</div></div>
       </div></div>
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="kosher-pa-parve.png" alt="Kosher Parve"><img src="Cacao%20nibs.png" alt="Cacao Nibs"><div class="name">Cacao Nibs</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="kosher-pa-parve.png" alt="Kosher Parve"></div><img src="Cacao%20nibs.png" alt="Cacao Nibs"><div class="name">Cacao Nibs</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back"><div><div class="back-name">Cacao Nibs</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">229 kcal/30g</span></div><div class="nutri-row"><span>Hierro</span><span class="nutri-val">7% VD</span></div><div class="nutri-row"><span>Magnesio</span><span class="nutri-val">16% VD</span></div><div class="nutri-row"><span>Antioxidantes</span><span class="nutri-val">Muy alto</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">9g</span></div></div><div class="benefit">Cacao puro — estimula el estado de ánimo sin azúcar añadida.</div></div>
       </div></div>
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="kosher-pa-parve.png" alt="Kosher Parve"><img src="Miel.png" alt="Miel"><div class="name">Miel de abeja</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="kosher-pa-parve.png" alt="Kosher Parve"></div><img src="Miel.png" alt="Miel"><div class="name">Miel de abeja</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back"><div><div class="back-name">Miel de abeja</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">304 kcal/100g</span></div><div class="nutri-row"><span>Azúcares</span><span class="nutri-val">82g</span></div><div class="nutri-row"><span>Antioxidantes</span><span class="nutri-val">Moderado</span></div><div class="nutri-row"><span>Antimicrobiano</span><span class="nutri-val">Natural</span></div></div><div class="benefit">Endulzante natural con propiedades antibacterianas y antiinflamatorias.</div></div>
       </div></div>
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="kosher-pa-parve.png" alt="Kosher Parve"><img src="Coco%20rallado.png" alt="Coco"><div class="name">Coco rayado</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="kosher-pa-parve.png" alt="Kosher Parve"></div><img src="Coco%20rallado.png" alt="Coco"><div class="name">Coco rayado</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back"><div><div class="back-name">Coco rayado</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">354 kcal/100g</span></div><div class="nutri-row"><span>Grasas MCT</span><span class="nutri-val">33g</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">9g</span></div><div class="nutri-row"><span>Manganeso</span><span class="nutri-val">60% VD</span></div><div class="nutri-row"><span>Selenio</span><span class="nutri-val">14% VD</span></div></div><div class="benefit">Grasas de cadena media (MCT) de rápida absorción y energía duradera.</div></div>
       </div></div>
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="kosher-pa-parve.png" alt="Kosher Parve"><img src="Avena.png" alt="Avena"><div class="name">Avena en hojuelas</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="kosher-pa-parve.png" alt="Kosher Parve"></div><img src="Avena.png" alt="Avena"><div class="name">Avena en hojuelas</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back"><div><div class="back-name">Avena en hojuelas</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">389 kcal/100g</span></div><div class="nutri-row"><span>Beta-glucano</span><span class="nutri-val">4g</span></div><div class="nutri-row"><span>Proteína</span><span class="nutri-val">17g</span></div><div class="nutri-row"><span>Hierro</span><span class="nutri-val">26% VD</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">10.6g</span></div></div><div class="benefit">Beta-glucano reduce el colesterol y proporciona saciedad duradera.</div></div>
       </div></div>
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="kosher-pa-parve.png" alt="Kosher Parve"><img src="mantequilla-mani.png" alt="Mantequilla maní"><div class="name">Mantequilla de maní</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="kosher-pa-parve.png" alt="Kosher Parve"></div><img src="mantequilla-mani.png" alt="Mantequilla maní"><div class="name">Mantequilla de maní</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back"><div><div class="back-name">Mantequilla de maní</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">588 kcal/100g</span></div><div class="nutri-row"><span>Proteína</span><span class="nutri-val">25g</span></div><div class="nutri-row"><span>Grasas buenas</span><span class="nutri-val">50g</span></div><div class="nutri-row"><span>Magnesio</span><span class="nutri-val">39% VD</span></div><div class="nutri-row"><span>Niacina B3</span><span class="nutri-val">67% VD</span></div></div><div class="benefit">Alto en proteína y grasas saludables monoinsaturadas — saciante y nutritivo.</div></div>
       </div></div>
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="kosher-pa-parve.png" alt="Kosher Parve"><img src="Granola%20avena%20y%20miel.png" alt="Granola"><div class="name">Granola con avena</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="kosher-pa-parve.png" alt="Kosher Parve"></div><img src="Granola%20avena%20y%20miel.png" alt="Granola"><div class="name">Granola con avena</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back"><div><div class="back-name">Granola con avena</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">471 kcal/100g</span></div><div class="nutri-row"><span>Carbohidratos</span><span class="nutri-val">64g</span></div><div class="nutri-row"><span>Fibra</span><span class="nutri-val">7g</span></div><div class="nutri-row"><span>Proteína</span><span class="nutri-val">11g</span></div><div class="nutri-row"><span>Hierro</span><span class="nutri-val">20% VD</span></div></div><div class="benefit">Energía compleja de liberación lenta — ideal para empezar el día activo.</div></div>
       </div></div>
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="kosher-pa-parve.png" alt="Kosher Parve"><img src="Mani%20picado.png" alt="Maní"><div class="name">Maní picado natural</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="kosher-pa-parve.png" alt="Kosher Parve"></div><img src="Mani%20picado.png" alt="Maní"><div class="name">Maní picado natural</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back"><div><div class="back-name">Maní picado natural</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">567 kcal/100g</span></div><div class="nutri-row"><span>Proteína</span><span class="nutri-val">26g</span></div><div class="nutri-row"><span>Folato</span><span class="nutri-val">61% VD</span></div><div class="nutri-row"><span>Vitamina E</span><span class="nutri-val">45% VD</span></div><div class="nutri-row"><span>Fósforo</span><span class="nutri-val">55% VD</span></div></div><div class="benefit">Excelente aporte de folato y Vitamina E — esencial para el cerebro.</div></div>
       </div></div>
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="kosher-pa-parve.png" alt="Kosher Parve"><img src="maranon-picado.png" alt="Marañón"><div class="name">Marañón</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="kosher-pa-parve.png" alt="Kosher Parve"></div><img src="maranon-picado.png" alt="Marañón"><div class="name">Marañón</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back"><div><div class="back-name">Marañón</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">553 kcal/100g</span></div><div class="nutri-row"><span>Cobre</span><span class="nutri-val">110% VD</span></div><div class="nutri-row"><span>Manganeso</span><span class="nutri-val">83% VD</span></div><div class="nutri-row"><span>Magnesio</span><span class="nutri-val">73% VD</span></div><div class="nutri-row"><span>Zinc</span><span class="nutri-val">61% VD</span></div></div><div class="benefit">La nuez más rica en minerales — esencial para huesos e inmunidad.</div></div>
       </div></div>
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="kosher-pa-parve.png" alt="Kosher Parve"><img src="almendras.png" alt="Almendras"><div class="name">Almendras</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="kosher-pa-parve.png" alt="Kosher Parve"></div><img src="almendras.png" alt="Almendras"><div class="name">Almendras</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back"><div><div class="back-name">Almendras</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">579 kcal/100g</span></div><div class="nutri-row"><span>Vitamina E</span><span class="nutri-val">131% VD</span></div><div class="nutri-row"><span>Magnesio</span><span class="nutri-val">63% VD</span></div><div class="nutri-row"><span>Calcio</span><span class="nutri-val">26% VD</span></div><div class="nutri-row"><span>Proteína</span><span class="nutri-val">21g</span></div></div><div class="benefit">La nuez con más Vitamina E — poderoso antioxidante para piel y cerebro.</div></div>
       </div></div>
     </div>
@@ -1062,7 +1101,7 @@ nav a:hover::after { width: 100%; }
     </div>
     <div class="cards-grid">
       <div class="flip-card"><div class="flip-inner">
-        <div class="flip-front"><img class="kosher-tag" src="kosher-pa-leche.png" alt="Kosher Leche"><img src="Leche%20en%20polvo.png" alt="Leche en polvo Klin"><div class="name">Leche en polvo Klin</div><div class="hint">Hover para info nutricional</div></div>
+        <div class="flip-front"><div class="kosher-corner"><img src="kosher-pa-leche.png" alt="Kosher Leche"></div><img src="Leche%20en%20polvo.png" alt="Leche en polvo Klin"><div class="name">Leche en polvo Klin</div><div class="hint">Hover para info nutricional</div></div>
         <div class="flip-back" style="background:#ff4b5f"><div><div class="back-name">Leche en polvo Klin</div><div class="nutri-row"><span>Calorías</span><span class="nutri-val">496 kcal/100g</span></div><div class="nutri-row"><span>Calcio</span><span class="nutri-val">91% VD</span></div><div class="nutri-row"><span>Proteína</span><span class="nutri-val">26g</span></div><div class="nutri-row"><span>Vitamina D</span><span class="nutri-val">30% VD</span></div><div class="nutri-row"><span>Vitamina B12</span><span class="nutri-val">46% VD</span></div></div><div class="benefit">Marca Klin — concentrado lácteo con calcio esencial para huesos y dientes.</div></div>
       </div></div>
     </div>
